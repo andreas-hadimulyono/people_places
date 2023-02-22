@@ -1,0 +1,19 @@
+version: '3.1'
+
+services:
+  mydb:
+    build:
+      context: .
+      dockerfile: mydb.Dockerfile
+    image: mydb
+    restart: always
+
+  myclient:
+    build:
+      context: .
+      dockerfile: myclient.Dockerfile
+    image: myclient
+    tty: true
+    command: ["python", "script.py"]
+    depends_on: 
+      - mydb
