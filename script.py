@@ -6,6 +6,8 @@ import time
 
 # this could possibly start before mysqld finished, so make simple retry
 # to connect before proceeding. in ideal world, the mysql should have healthcheck
+mydb = None
+cursor = None
 attempts = 0
 while attempts < 3:
     try:
