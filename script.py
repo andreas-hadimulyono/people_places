@@ -8,8 +8,7 @@ import time
 # to connect before proceeding. in ideal world, the mysql should have healthcheck
 mydb = None
 cursor = None
-attempts = 0
-while attempts < 3:
+while cursor is None:
     try:
         mydb = mysql.connector.connect(
             host=os.environ['MYSQL_HOST'],
@@ -21,7 +20,6 @@ while attempts < 3:
         cursor = mydb.cursor()
         break
     except:
-        attempts += 1
         print('unable to connect, waiting for a few seconds before trying again')
         time.sleep(5)
 
